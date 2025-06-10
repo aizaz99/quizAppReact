@@ -10,14 +10,28 @@ function App() {
   const [gameState, setGameState] = useState<GameState>("start")
   const [selectedAnswer, setSelectedAnswer] = useState<number | null> (null);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+    const [score, setScore] = useState<number>(0);
   
   const handleStart = () => {
     setGameState("playing")
   }
 
   const handleAnswer = (index:number):void => {
+
     setSelectedAnswer(index)
+    const isCorrect = index === QUESTIONS[currentQuestion].correct;
+
+    if(isCorrect){
+      setScore((prev)=> +1)
+    }
+    setTimeout(() => {
+      if(currentQuestion< QUESTIONS.length-1) {
     setCurrentQuestion((prev)=> prev +1)
+    setSelectedAnswer(null);
+      } else{
+        setGameState("end")
+      }
+    }, 1500)
   }
 
   return (
@@ -27,8 +41,11 @@ function App() {
       {gameState === "playing" && (
         <div className="p-8">
         <QuestionCard question={QUESTIONS[currentQuestion]} onAnswerSelect={handleAnswer} selectedAnswer = {selectedAnswer} totalQuestions={QUESTIONS.length} currentQuestion = {currentQuestion}/>
+         <div className="mt-6 text-center text-gray-600">
+              Score: {score}/{QUESTIONS.length}
+            </div>
         </div>)}
-      {gameState === "end" && <GameOver/>}
+      {gameState === "end" && <GameOver score={score} onRestart={handleStart}/>}
       
       </div>
     </div>
