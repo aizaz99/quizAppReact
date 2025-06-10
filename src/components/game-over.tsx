@@ -3,15 +3,17 @@ import { Trophy } from 'lucide-react'
 interface GameOverProps {
   onRestart: () => void;
   score:number;
+  totalQuestions:number;
 }
 
-export default function GameOver({onRestart}: GameOverProps) {
+export default function GameOver({onRestart, score, totalQuestions}: GameOverProps) {
+     const percentage = Math.round((score / totalQuestions) * 100);
   return (
     <div className='p-8 text-center'> 
       <Trophy className="w-16 h-16 mx-auto text-yellow-500 mb-4" />
        <h2 className="text-2xl font-bold text-gray-800 mb-4">Game Over!</h2>
       <p className="text-lg text-gray-600">
-        Final Score: 2/5
+        Final Score: {score}/{totalQuestions}
       </p>
      <button
         onClick={onRestart}
