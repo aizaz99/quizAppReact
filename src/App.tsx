@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import GameOver from "./components/game-over"
 import QuestionCard from "./components/question-card"
 import StartScreen from "./components/start-screen"
 import type { GameState } from "./types/quiz"
 import { QUESTIONS } from "./data/questions"
+import Timer from "./components/timer"
 
 
 function App() {
@@ -11,9 +12,27 @@ function App() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null> (null);
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [score, setScore] = useState<number>(0);
+     const [timerLeft, setTimerLeft] = useState<number>(30);
+
+     useEffect(()=>{
+      let timer: number;
+      if(gameState === "playing" && timerLeft > 0) {
+        timer = setInterval(()=> {
+          setTimerLeft((prev) => prev -1);
+        }, 1000)
+       
+      } else if (timerLeft === 0 && gameState === "playing"){
+        setGameState("end")
+
+      }
+       return () => clearInterval(timer);
+      
+     }, [timerLeft, gameState])
   
   const handleStart = () => {
     setGameState("playing")
+    setTimerLeft(10);
+    setScore(0);
   }
 
   const handleAnswer = (index:number):void => {
@@ -40,12 +59,13 @@ function App() {
       {gameState === "start" && <StartScreen onStart = {handleStart}/>}
       {gameState === "playing" && (
         <div className="p-8">
+          <Timer timerLeft={timerLeft}/>
         <QuestionCard question={QUESTIONS[currentQuestion]} onAnswerSelect={handleAnswer} selectedAnswer = {selectedAnswer} totalQuestions={QUESTIONS.length} currentQuestion = {currentQuestion}/>
          <div className="mt-6 text-center text-gray-600">
               Score: {score}/{QUESTIONS.length}
             </div>
         </div>)}
-      {gameState === "end" && <GameOver score={score} onRestart={handleStart}/>}
+      {gameState === "end" && <GameOver score={score} totalQuestions={QUESTIONS.length} onRestart={handleStart}/>}
       
       </div>
     </div>
