@@ -1,54 +1,52 @@
-# React + TypeScript + Vite
+🧠 React Quiz App
+This is a simple, fast quiz app built with React and Vite. The goal was to create a smooth experience for users to test their knowledge across different topics while keeping the UI clean and responsive.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✅ What It Does
+Lets users take multiple-choice quizzes
 
-Currently, two official plugins are available:
+Tracks score in real time
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Gives instant feedback on right or wrong answers
 
-## Expanding the ESLint configuration
+Provides a summary screen at the end
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+It’s mobile-friendly and super fast thanks to Vite and React.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+🧱 Tech Stack
+React (with hooks)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Vite for fast bundling and dev experience
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+TypeScript for type safety
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Tailwind CSS for styling
+
+ESLint for code linting
+
+Netlify for deployment
+
+⚙️ Features
+Dynamic quiz questions (easy to extend)
+
+Score tracking
+
+Responsive design (works well on all screen sizes)
+
+Clean UI built with Tailwind
+
+Fast load times with Vite
+
+Deployed with Netlify
+
+🧩 Challenges I Ran Into
+Managing quiz state cleanly (current question, selected answer, score)
+
+TypeScript setup with Vite took some tweaking
+
+Getting Tailwind to work smoothly with the Vite and React config
+
+Making it visually clean while keeping the codebase readable
+
+🚀 Live Demo
+👉 Check it out on Netlify
+(If that link doesn’t work, it means the name is taken — I’ll update the URL once deployed)
