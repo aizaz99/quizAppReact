@@ -33,6 +33,8 @@ function App() {
     setGameState("playing")
     setTimerLeft(10);
     setScore(0);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null)
   }
 
   const handleAnswer = (index:number):void => {
